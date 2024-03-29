@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Vue.js + Webpack",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack://custom-component-form-editor/.*": "${webRoot}/*",
+                "webpack://custom-component-form-editor/src/*": "${webRoot}/src/*",
+                "webpack://custom-component-form-editor/node_modules/*": "${webRoot}/node_modules/*",
+                "webpack://custom-component-form-editor/node_modules/@bpmn-io/properties-panel/preact/hooks/dist/hooks.module.js": "${webRoot}/node_modules@bpmn-io/properties-panel/preact/hooks/src/index.js",
+            }
+        }]
+}

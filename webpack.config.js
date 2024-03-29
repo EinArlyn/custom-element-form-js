@@ -5,6 +5,7 @@ const { NormalModuleReplacementPlugin } = require('webpack');
 module.exports = {
   mode: 'development',
   entry: './src/main.ts',
+  devtool: 'source-map',
   output: {
     filename: 'main.bundle.js',
     path: path.resolve(__dirname, 'dist'),
