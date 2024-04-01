@@ -3,7 +3,7 @@ import { get, set } from 'min-dash';
 /*
  * Import components and utilities from our extension API. Warning: for demo experiments only.
  */
-const { NumberFieldEntry, isNumberFieldEntryEdited } = window['propertiesPanel'];
+const { SelectEntry, NumberFieldEntry, isNumberFieldEntryEdited } = window['propertiesPanel'];
 const { html } = window['htmPreact'];
 
 // import { NumberFieldEntry, isNumberFieldEntryEdited } from '@bpmn-io/properties-panel';
@@ -77,6 +77,13 @@ function RangeEntries(field, editField) {
     };
   };
 
+  const getOptions = (key) => {
+    console.log('getOptions', key);
+    return () => {
+      return get(field, [ 'range', key ]);
+    };
+  };
+
   return [
     {
       id: 'range-min',
@@ -101,6 +108,14 @@ function RangeEntries(field, editField) {
       field,
       isEdited: isNumberFieldEntryEdited,
       onChange
+    },
+    {
+      id: 'range-items',
+      component: Items,
+      field,
+      label: 'Items',
+      getOptions,
+      getValue
     }
   ];
 
@@ -164,6 +179,26 @@ function Step(props) {
     label='Step'
     setValue=${ onChange('step') }
     debounce=${ debounce }
+  />`;
+}
+
+function Items(props) {
+  console.log('Items', props);
+  const {
+    id,
+    label,
+    field,
+    element,
+    getOptions,
+    getValue
+  } = props;
+
+  return html`<${SelectEntry}
+    id=${ id }
+    element=${ field }
+    label=${ label }
+    getOptions=${ getOptions(element) }
+    getValue=${ getValue('items') }
   />`;
 }
 
